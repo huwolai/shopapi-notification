@@ -16,15 +16,19 @@ func main() {
 	queue.ConsumeOrderEvent(func(event *queue.OrderEvent,dv amqp.Delivery) {
 		//订单已付款事件
 		if event.EventKey==queue.ORDER_EVENT_PAID {
-			tmpId :=setting.GetYunTongXunSetting()["morder_template_id"]
-
-			service.SendSMSOfYunTongXun()
+			SendMOrderNotify(event)
+			return
 		}
+
+		dv.Ack(false)
 	})
 
 }
 
-//发送短信
-func SendMorderNotify()  {
-
+//发送商户收到订单短信
+func SendMOrderNotify(event  *queue.OrderEvent)  {
+	tmpId :=setting.GetYunTongXunSetting()["morder_template_id"]
+	//商户手机号
+	mmobile := event.Content.ExtData["m_mobile"]
+	service.SendSMSOfYunTongXun(mmobile,tmpId,[]string{event.Content.CreateTime})
 }
