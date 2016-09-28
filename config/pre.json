@@ -1,0 +1,3 @@
+{
+  "amqp_url":"amqp://guest:guest@rabbitmq-service.databasestest.svc.cluster.local:5672/"
+}
