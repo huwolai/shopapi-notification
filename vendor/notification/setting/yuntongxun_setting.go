@@ -1,7 +1,6 @@
 package setting
 
 import (
-	"gitlab.qiyunxin.com/tangtao/utils/config"
 	"gitlab.qiyunxin.com/tangtao/utils/log"
 	"fmt"
 	"io/ioutil"
@@ -18,7 +17,7 @@ var configMap map[string]string
 func GetYunTongXunSetting() map[string]string {
 
 	if configMap == nil {
-		err :=config.LoadSettingsByFile("config/sms_yuntongxun.json",&configMap)
+		err :=LoadSettingsByFile("config/sms_yuntongxun.json",&configMap)
 		log.Error(err)
 	}
 	return configMap
