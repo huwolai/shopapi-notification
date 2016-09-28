@@ -1,0 +1,3 @@
+[submodule "vendor/gitlab.qiyunxin.com/tangtao/utils"]
+	path = vendor/gitlab.qiyunxin.com/tangtao/utils
+	url = http://gitlab.qiyunxin.com/tangtao/utils.git
