@@ -30,5 +30,8 @@ func SendMOrderNotify(event  *queue.OrderEvent)  {
 	tmpId :=setting.GetYunTongXunSetting()["morder_template_id"]
 	//商户手机号
 	mmobile := event.Content.ExtData["m_mobile"]
-	service.SendSMSOfYunTongXun(mmobile,tmpId,[]string{event.Content.CreateTime})
+	if mmobile!=nil {
+		service.SendSMSOfYunTongXun(mmobile.(string),tmpId,[]string{event.Content.CreateTime})
+	}
+
 }
