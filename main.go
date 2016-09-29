@@ -11,11 +11,12 @@ import (
 
 func main() {
 	forever := make(chan bool)
-	log.Info("Awaiting Message...");
-
-	<-forever
+	err :=config.Init(false)
+	if err!=nil{
+		log.Error(err)
+		return
+	}
 	//初始化消息队列
-	log.Info(config.GetValue("amqp_url").ToString())
 	queue.SetupAMQP(config.GetValue("amqp_url").ToString())
 
 	//订阅订单事件
