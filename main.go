@@ -6,10 +6,12 @@ import (
 	"github.com/streadway/amqp"
 	"notification/setting"
 	"notification/service"
+	"gitlab.qiyunxin.com/tangtao/utils/log"
 )
 
 func main() {
 	//初始化消息队列
+	log.Info(config.GetValue("amqp_url").ToString())
 	queue.SetupAMQP(config.GetValue("amqp_url").ToString())
 
 	//订阅订单事件

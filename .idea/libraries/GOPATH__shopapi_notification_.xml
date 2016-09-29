@@ -1,0 +1,62 @@
+<component name="libraryTable">
+  <library name="GOPATH &lt;shopapi-notification&gt;">
+    <CLASSES>
+      <root url="file://$PROJECT_DIR$/../imagesever" />
+      <root url="file://$PROJECT_DIR$/../commuser" />
+      <root url="file://$PROJECT_DIR$/../configcenter" />
+      <root url="file://$PROJECT_DIR$/../appmanagerapi" />
+      <root url="file://$PROJECT_DIR$/../kubernetes-master" />
+      <root url="file://$PROJECT_DIR$/../demo" />
+      <root url="file://$PROJECT_DIR$/../k8s.io" />
+      <root url="file://$PROJECT_DIR$/../taskconsume" />
+      <root url="file://$PROJECT_DIR$/../shopapi" />
+      <root url="file://$PROJECT_DIR$/../uac" />
+      <root url="file://$PROJECT_DIR$/../gitlab.qiyunxin.com" />
+      <root url="file://$PROJECT_DIR$/../github.com" />
+      <root url="file://$PROJECT_DIR$/../golang.org" />
+      <root url="file://$PROJECT_DIR$/../pay" />
+      <root url="file://$PROJECT_DIR$/../servicemanagerapi" />
+      <root url="file://$PROJECT_DIR$/../gopkg.in" />
+      <root url="file://$PROJECT_DIR$/../task" />
+      <root url="file://$PROJECT_DIR$/../couponapi" />
+      <root url="file://$PROJECT_DIR$/../git.oschina.net" />
+      <root url="file://$PROJECT_DIR$/../FishChatServer" />
+      <root url="file://$PROJECT_DIR$/../hello" />
+      <root url="file://$PROJECT_DIR$/../goim" />
+      <root url="file://$PROJECT_DIR$/../go4.org" />
+      <root url="file://$PROJECT_DIR$/../usercenter" />
+      <root url="file://$PROJECT_DIR$/../bitbucket.org" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="file://$PROJECT_DIR$/../imagesever" />
+      <root url="file://$PROJECT_DIR$/../commuser" />
+      <root url="file://$PROJECT_DIR$/../configcenter" />
+      <root url="file://$PROJECT_DIR$/../appmanagerapi" />
+      <root url="file://$PROJECT_DIR$/../kubernetes-master" />
+      <root url="file://$PROJECT_DIR$/../demo" />
+      <root url="file://$PROJECT_DIR$/../k8s.io" />
+      <root url="file://$PROJECT_DIR$/../taskconsume" />
+      <root url="file://$PROJECT_DIR$/../shopapi" />
+      <root url="file://$PROJECT_DIR$/../uac" />
+      <root url="file://$PROJECT_DIR$/../gitlab.qiyunxin.com" />
+      <root url="file://$PROJECT_DIR$/../github.com" />
+      <root url="file://$PROJECT_DIR$/../golang.org" />
+      <root url="file://$PROJECT_DIR$/../pay" />
+      <root url="file://$PROJECT_DIR$/../servicemanagerapi" />
+      <root url="file://$PROJECT_DIR$/../gopkg.in" />
+      <root url="file://$PROJECT_DIR$/../task" />
+      <root url="file://$PROJECT_DIR$/../couponapi" />
+      <root url="file://$PROJECT_DIR$/../git.oschina.net" />
+      <root url="file://$PROJECT_DIR$/../FishChatServer" />
+      <root url="file://$PROJECT_DIR$/../hello" />
+      <root url="file://$PROJECT_DIR$/../goim" />
+      <root url="file://$PROJECT_DIR$/../go4.org" />
+      <root url="file://$PROJECT_DIR$/../usercenter" />
+      <root url="file://$PROJECT_DIR$/../bitbucket.org" />
+    </SOURCES>
+    <excluded>
+      <root url="file://$PROJECT_DIR$" />
+    </excluded>
+  </library>
+</component>
