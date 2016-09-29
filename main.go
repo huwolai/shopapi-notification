@@ -10,6 +10,10 @@ import (
 )
 
 func main() {
+	forever := make(chan bool)
+	log.Info("Awaiting Message...");
+
+	<-forever
 	//初始化消息队列
 	log.Info(config.GetValue("amqp_url").ToString())
 	queue.SetupAMQP(config.GetValue("amqp_url").ToString())
@@ -24,6 +28,11 @@ func main() {
 
 		dv.Ack(false)
 	})
+	log.Info("Awaiting Message...");
+
+	<-forever
+
+	log.Info("程序退出...");
 
 }
 
