@@ -28,10 +28,10 @@ func main() {
 			go SendMOrderNotify(event)
 			//发送用户订单短信
 			go SendUOrderNotify(event)
+			dv.Ack(false)
 			return
 		}
 
-		dv.Ack(false)
 	})
 	log.Info("Awaiting Message...");
 
