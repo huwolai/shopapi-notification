@@ -48,10 +48,24 @@ func SendMOrderNotify(event  *queue.OrderEvent)  {
 	serviceMobile := setting.GetYunTongXunSetting()["service_mobile"]
 	//商户手机号
 	extData :=event.Content.ExtData
-	mmobile := extData["m_mobile"].(string)
-	merchantName := extData["m_name"].(string)
-	name :=extData["name"].(string)
-	address :=extData["address"].(string)
+	var mmobile string
+	if extData["m_mobile"]!=nil{
+		mmobile = extData["m_mobile"].(string)
+
+	}
+	var merchantName string
+	if extData["m_name"]!=nil{
+		merchantName = extData["m_name"].(string)
+
+	}
+	var name string
+	if extData["name"]!=nil{
+		name =extData["name"].(string)
+	}
+	var address string
+	if extData["address"]!=nil{
+		address =extData["address"].(string)
+	}
 	dinnerTime :=""
 	items :=event.Content.Items
 	if items!=nil&&len(items)>0{
@@ -62,7 +76,9 @@ func SendMOrderNotify(event  *queue.OrderEvent)  {
 			if err!=nil{
 				log.Error(err)
 			}
-			dinnerTime = resultMap["dinner_time"].(string)
+			if resultMap["dinner_time"]!=nil{
+				dinnerTime = resultMap["dinner_time"].(string)
+			}
 		}
 	}
 	if mmobile!="" {
@@ -79,11 +95,19 @@ func SendUOrderNotify(event *queue.OrderEvent)  {
 	tmpId :=setting.GetYunTongXunSetting()["uorder_template_id"]
 	extData :=event.Content.ExtData
 	//用户手机号
-	mobile := extData["mobile"].(string)
+	var mobile string
+	if extData["mobile"]!=nil {
+		mobile = extData["mobile"].(string)
+	}
+
 	//厨师手机号
 	//mmobile := extData["m_mobile"]
 	//厨师名称
-	merchantName := extData["m_name"].(string)
+	var merchantName string
+	if extData["m_name"]!=nil{
+		merchantName = extData["m_name"].(string)
+
+	}
 	if mobile!="" {
 		err :=service.SendSMSOfYunTongXun(mobile,tmpId,[]string{merchantName,event.Content.CreateTime,event.Content.OrderNo})
 		if err!=nil{
