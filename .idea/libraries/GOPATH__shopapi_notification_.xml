@@ -1,6 +1,7 @@
 <component name="libraryTable">
   <library name="GOPATH &lt;shopapi-notification&gt;">
     <CLASSES>
+      <root url="file://$PROJECT_DIR$/../usercenter" />
       <root url="file://$PROJECT_DIR$/../imagesever" />
       <root url="file://$PROJECT_DIR$/../commuser" />
       <root url="file://$PROJECT_DIR$/../configcenter" />
@@ -24,11 +25,11 @@
       <root url="file://$PROJECT_DIR$/../hello" />
       <root url="file://$PROJECT_DIR$/../goim" />
       <root url="file://$PROJECT_DIR$/../go4.org" />
-      <root url="file://$PROJECT_DIR$/../usercenter" />
       <root url="file://$PROJECT_DIR$/../bitbucket.org" />
     </CLASSES>
     <JAVADOC />
     <SOURCES>
+      <root url="file://$PROJECT_DIR$/../usercenter" />
       <root url="file://$PROJECT_DIR$/../imagesever" />
       <root url="file://$PROJECT_DIR$/../commuser" />
       <root url="file://$PROJECT_DIR$/../configcenter" />
@@ -52,7 +53,6 @@
       <root url="file://$PROJECT_DIR$/../hello" />
       <root url="file://$PROJECT_DIR$/../goim" />
       <root url="file://$PROJECT_DIR$/../go4.org" />
-      <root url="file://$PROJECT_DIR$/../usercenter" />
       <root url="file://$PROJECT_DIR$/../bitbucket.org" />
     </SOURCES>
     <excluded>
