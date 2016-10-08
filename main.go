@@ -85,7 +85,9 @@ func SendMOrderNotify(event  *queue.OrderEvent)  {
 		err :=service.SendSMSOfYunTongXun(mmobile,tmpId,[]string{merchantName,name,address,dinnerTime,event.Content.Title,serviceMobile})
 		if err!=nil{
 			log.Error("商户订单短信发送失败",err)
+			return
 		}
+		log.Info("商户订单短信发送成功！")
 	}
 
 }
@@ -108,11 +110,28 @@ func SendUOrderNotify(event *queue.OrderEvent)  {
 		merchantName = extData["m_name"].(string)
 
 	}
+	dinnerTime :=""
+	items :=event.Content.Items
+	if items!=nil&&len(items)>0{
+		item :=items[0]
+		if item.Json!="" {
+			var resultMap map[string]interface{}
+			err :=util.ReadJsonByByte([]byte(item.Json),&resultMap)
+			if err!=nil{
+				log.Error(err)
+			}
+			if resultMap["dinner_time"]!=nil{
+				dinnerTime = resultMap["dinner_time"].(string)
+			}
+		}
+	}
 	if mobile!="" {
-		err :=service.SendSMSOfYunTongXun(mobile,tmpId,[]string{merchantName,event.Content.CreateTime,event.Content.OrderNo})
+		err :=service.SendSMSOfYunTongXun(mobile,tmpId,[]string{merchantName,dinnerTime,event.Content.OrderNo})
 		if err!=nil{
 			log.Error("用户订单短信发送失败",err)
+			return
 		}
+		log.Info("用户订单短信发送成功！")
 
 	}
 }

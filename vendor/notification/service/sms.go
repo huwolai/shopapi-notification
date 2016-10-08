@@ -25,7 +25,6 @@ func SendSMSOfYunTongXun(mobile string,templateId string,datas []string) (error)
 	appId := configMap["app_id"]
 	date  :=time.Now()
 	dateStr :=date.Format("20060102150405")
-	log.Info(dateStr)
 
 	auth :=base64.StdEncoding.EncodeToString([]byte(accountSid+":"+dateStr))
 	h:= md5.New()
