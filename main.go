@@ -70,6 +70,8 @@ func SendMOrderNotify(event  *queue.OrderEvent)  {
 	if extData["mobile"]!=nil {
 		mobile = extData["mobile"].(string)
 	}
+	//是否是私人订制
+	var isTailor bool
 	dinnerTime :=""
 	items :=event.Content.Items
 	if items!=nil&&len(items)>0{
@@ -84,8 +86,17 @@ func SendMOrderNotify(event  *queue.OrderEvent)  {
 				if resultMap["dinner_time"]!=nil{
 					dinnerTime = resultMap["dinner_time"].(string)
 				}
+				//私人订制
+				if resultMap["goods_type"]!=nil&&resultMap["goods_type"].(string)=="tailor" {
+					isTailor = true
+				}
 			}
 		}
+	}
+
+	if isTailor {
+		log.Info("私人订制订单,不发送厨师短信！")
+		return
 	}
 	if  dinnerTime=="" {
 		log.Info("不是厨师订单,不发送短信")
