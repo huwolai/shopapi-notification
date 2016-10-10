@@ -44,8 +44,6 @@ func main() {
 //发送商户收到订单短信
 func SendMOrderNotify(event  *queue.OrderEvent)  {
 	tmpId :=setting.GetYunTongXunSetting()["morder_template_id"]
-	//服务电话
-	serviceMobile := setting.GetYunTongXunSetting()["service_mobile"]
 	//商户手机号
 	extData :=event.Content.ExtData
 	var mmobile string
@@ -66,6 +64,12 @@ func SendMOrderNotify(event  *queue.OrderEvent)  {
 	if extData["address"]!=nil{
 		address =extData["address"].(string)
 	}
+
+	//用户手机号
+	var mobile string
+	if extData["mobile"]!=nil {
+		mobile = extData["mobile"].(string)
+	}
 	dinnerTime :=""
 	items :=event.Content.Items
 	if items!=nil&&len(items)>0{
@@ -76,13 +80,19 @@ func SendMOrderNotify(event  *queue.OrderEvent)  {
 			if err!=nil{
 				log.Error(err)
 			}
-			if resultMap["dinner_time"]!=nil{
-				dinnerTime = resultMap["dinner_time"].(string)
+			if resultMap!=nil{
+				if resultMap["dinner_time"]!=nil{
+					dinnerTime = resultMap["dinner_time"].(string)
+				}
 			}
 		}
 	}
+	if  dinnerTime=="" {
+		log.Info("不是厨师订单,不发送短信")
+		return
+	}
 	if mmobile!="" {
-		err :=service.SendSMSOfYunTongXun(mmobile,tmpId,[]string{merchantName,name,address,dinnerTime,event.Content.Title,serviceMobile})
+		err :=service.SendSMSOfYunTongXun(mmobile,tmpId,[]string{merchantName,name,address,dinnerTime,event.Content.Title,mobile})
 		if err!=nil{
 			log.Error("商户订单短信发送失败",err)
 			return
@@ -112,6 +122,9 @@ func SendUOrderNotify(event *queue.OrderEvent)  {
 	}
 	dinnerTime :=""
 	items :=event.Content.Items
+	//是否是私人订制
+	var isTailor bool
+	var title string
 	if items!=nil&&len(items)>0{
 		item :=items[0]
 		if item.Json!="" {
@@ -120,13 +133,35 @@ func SendUOrderNotify(event *queue.OrderEvent)  {
 			if err!=nil{
 				log.Error(err)
 			}
-			if resultMap["dinner_time"]!=nil{
-				dinnerTime = resultMap["dinner_time"].(string)
+			if resultMap!=nil{
+				if resultMap["dinner_time"]!=nil{
+					dinnerTime = resultMap["dinner_time"].(string)
+				}
+
+				//私人订制
+				if resultMap["goods_type"]!=nil&&resultMap["goods_type"].(string)=="tailor" {
+					isTailor = true
+				}
 			}
+
 		}
+		title = item.Title
+	}
+
+	if  dinnerTime=="" {
+		log.Info("不是厨师订单,不发送短信")
+		return
+	}
+	var smsData []string
+	if isTailor {
+		tmpId = setting.GetYunTongXunSetting()["tailor_template_id"]
+		smsData = []string{title,dinnerTime,event.Content.OrderNo}
+	}else{
+		smsData = []string{merchantName,dinnerTime,event.Content.OrderNo}
 	}
 	if mobile!="" {
-		err :=service.SendSMSOfYunTongXun(mobile,tmpId,[]string{merchantName,dinnerTime,event.Content.OrderNo})
+
+		err :=service.SendSMSOfYunTongXun(mobile,tmpId,smsData)
 		if err!=nil{
 			log.Error("用户订单短信发送失败",err)
 			return
