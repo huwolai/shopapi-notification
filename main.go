@@ -73,23 +73,19 @@ func SendMOrderNotify(event  *queue.OrderEvent)  {
 	//是否是私人订制
 	var isTailor bool
 	dinnerTime :=""
-	items :=event.Content.Items
-	if items!=nil&&len(items)>0{
-		item :=items[0]
-		if item.Json!="" {
-			var resultMap map[string]interface{}
-			err :=util.ReadJsonByByte([]byte(item.Json),&resultMap)
-			if err!=nil{
-				log.Error(err)
+	if event.Content.Json!="" {
+		var resultMap map[string]interface{}
+		err :=util.ReadJsonByByte([]byte(event.Content.Json),&resultMap)
+		if err!=nil{
+			log.Error(err)
+		}
+		if resultMap!=nil{
+			if resultMap["chef_time"]!=nil{
+				dinnerTime = resultMap["chef_time"].(string)
 			}
-			if resultMap!=nil{
-				if resultMap["dinner_time"]!=nil{
-					dinnerTime = resultMap["dinner_time"].(string)
-				}
-				//私人订制
-				if resultMap["goods_type"]!=nil&&resultMap["goods_type"].(string)=="tailor" {
-					isTailor = true
-				}
+			//私人订制
+			if resultMap["goods_type"]!=nil&&resultMap["goods_type"].(string)=="tailor" {
+				isTailor = true
 			}
 		}
 	}
@@ -136,26 +132,24 @@ func SendUOrderNotify(event *queue.OrderEvent)  {
 	//是否是私人订制
 	var isTailor bool
 	var title string
+	if event.Content.Json!="" {
+		var resultMap map[string]interface{}
+		err :=util.ReadJsonByByte([]byte(event.Content.Json),&resultMap)
+		if err!=nil{
+			log.Error(err)
+		}
+		if resultMap!=nil{
+			if resultMap["chef_time"]!=nil{
+				dinnerTime = resultMap["chef_time"].(string)
+			}
+			//私人订制
+			if resultMap["goods_type"]!=nil&&resultMap["goods_type"].(string)=="tailor" {
+				isTailor = true
+			}
+		}
+	}
 	if items!=nil&&len(items)>0{
 		item :=items[0]
-		if item.Json!="" {
-			var resultMap map[string]interface{}
-			err :=util.ReadJsonByByte([]byte(item.Json),&resultMap)
-			if err!=nil{
-				log.Error(err)
-			}
-			if resultMap!=nil{
-				if resultMap["dinner_time"]!=nil{
-					dinnerTime = resultMap["dinner_time"].(string)
-				}
-
-				//私人订制
-				if resultMap["goods_type"]!=nil&&resultMap["goods_type"].(string)=="tailor" {
-					isTailor = true
-				}
-			}
-
-		}
 		title = item.Title
 	}
 
