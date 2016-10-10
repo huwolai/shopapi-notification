@@ -148,7 +148,7 @@ func SendUOrderNotify(event *queue.OrderEvent)  {
 		title = item.Title
 	}
 
-	if  dinnerTime=="" {
+	if  dinnerTime==""&&!isTailor {
 		log.Info("不是厨师订单,不发送短信")
 		return
 	}
