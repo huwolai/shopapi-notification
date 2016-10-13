@@ -156,7 +156,7 @@ func SendUOrderNotify(event *queue.OrderEvent) {
 							log.Error(err)
 						}
 						if orderResultMap != nil {
-							dinnerTime = orderResultMap["chef_time"]
+							dinnerTime = orderResultMap["chef_time"].(string)
 						}
 					}
 					tmpId = setting.GetYunTongXunSetting()["tailor_template_id"]
