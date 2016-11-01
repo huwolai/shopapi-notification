@@ -64,6 +64,14 @@ func SendMOrderNotify(event *queue.OrderEvent) {
 	if extData["address"] != nil {
 		address = extData["address"].(string)
 	}
+	
+	// 是否代购买
+	var isdiy string
+	if extData["isdiy"] != nil {
+		isdiy = extData["isdiy"].(string)
+	}else{
+		isdiy=""
+	}
 
 	//用户手机号
 	var mobile string
@@ -90,7 +98,7 @@ func SendMOrderNotify(event *queue.OrderEvent) {
 				//厨师订单
 				if goodsType == "chef" {
 					if mmobile != "" {
-						err := service.SendSMSOfYunTongXun(mmobile, tmpId, []string{merchantName, name, address, dinnerTime, event.Content.Title, mobile})
+						err := service.SendSMSOfYunTongXun(mmobile, tmpId, []string{merchantName, name, address, dinnerTime, event.Content.Title,isdiy, mobile})
 						if err != nil {
 							log.Error("商户订单短信发送失败", err)
 							return
