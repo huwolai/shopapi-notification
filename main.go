@@ -104,9 +104,8 @@ func SendMOrderNotify(event *queue.OrderEvent) {
 							return
 						}
 						log.Info("商户订单短信发送成功！")
-						log.Info(tmpId)
-						log.Info(isdiy)
-						log.Info("test!!!!!!!!!!")
+						log.Error("商户订单短信发送失败", tmpId)
+						log.Error("商户订单短信发送失败", isdiy)
 					}
 				} else {
 					log.Info("不是厨师订单！")
